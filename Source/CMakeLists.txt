@@ -13,6 +13,8 @@ target_include_directories(${TARGET_NAME} PRIVATE
 
 target_link_libraries(${TARGET_NAME} ${SDL2_LIBRARY})
 target_link_libraries(${TARGET_NAME} ${OPENGL_gl_LIBRARY})
+target_link_libraries(${TARGET_NAME} ${GLEW_LIBRARIES})
+
 # target_link_libraries(${TARGET_NAME} ${SDL2_IMAGE_LIBRARY})
 
 # install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION ${BIN_DIR})
