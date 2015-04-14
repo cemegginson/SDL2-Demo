@@ -19,45 +19,42 @@ int main(int argc[], char* argv) {
         return 1;
     }
 
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if(context == NULL) {
         std::cerr << "SDL_GL_CreateContext: " << SDL_GetError() << std::endl;
         return 1;
     }
 
-    // glClearColor(0, 0, 0, 1);
+    SDL_GL_SetSwapInterval(1);
 
-    GLuint VertexArrayID;
-    glGenVertexArrays(1, &VertexArrayID);
-    glBindVertexArray(VertexArrayID);
+    /* Clear our buffer with a red background */
+    glClearColor ( 1.0, 0.0, 0.0, 1.0 );
+    glClear ( GL_COLOR_BUFFER_BIT );
+    /* Swap our back buffer to the front */
+    SDL_GL_SwapWindow(window);
+    /* Wait 2 seconds */
+    SDL_Delay(2000);
 
-    // An array of 3 vectors which represents 3 vertices
-    static const GLfloat g_vertex_buffer_data[] = {
-       -1.0f, -1.0f, 0.0f,
-       1.0f, -1.0f, 0.0f,
-       0.0f,  1.0f, 0.0f,
-    };
+    /* Same as above, but green */
+    glClearColor ( 0.0, 1.0, 0.0, 1.0 );
+    glClear ( GL_COLOR_BUFFER_BIT );
+    SDL_GL_SwapWindow(window);
+    SDL_Delay(2000);
 
-    GLuint vertexbuffer;
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-
-
-    glClear(GL_COLOR_BUFFER_BIT);
-
-
-    // while(true) {
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDisableVertexAttribArray(0);
-        SDL_GL_SwapWindow(window);
-    // }
+    /* Same as above, but blue */
+    glClearColor ( 0.0, 0.0, 1.0, 1.0 );
+    glClear ( GL_COLOR_BUFFER_BIT );
+    SDL_GL_SwapWindow(window);
+    SDL_Delay(2000);
 
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
 
 }
