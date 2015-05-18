@@ -1,11 +1,11 @@
-#include <SDL.h>
-#include <GL/glew.h>
-#include <SDL_opengl.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <iostream>
 #include <stdio.h>
 #include <string>
-#include <iostream>
+
+#include <GL/gl.h>
+#include <GL/glew.h>
+#include <SDL.h>
+#include <SDL_opengl.h>
 
 int main(int argc[], char* argv) {
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
@@ -19,7 +19,7 @@ int main(int argc[], char* argv) {
         return 1;
     }
 
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
@@ -51,6 +51,7 @@ int main(int argc[], char* argv) {
     SDL_GL_SwapWindow(window);
     SDL_Delay(2000);
 
+    // Close everything
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
     SDL_Quit();
